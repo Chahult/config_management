@@ -11,14 +11,14 @@
 // SPDX-License-Identifier: Apache-2.0
 // *******************************************************************************
 
-#ifndef SCORE_CONFIG_MANAGEMENT_CONFIGDAEMON_CODE_SERVICES_DETAILS_MW_COM_INTERNAL_CONFIG_PROVIDER_SERVICE_IMPL_H
-#define SCORE_CONFIG_MANAGEMENT_CONFIGDAEMON_CODE_SERVICES_DETAILS_MW_COM_INTERNAL_CONFIG_PROVIDER_SERVICE_IMPL_H
+#ifndef SCORE_CONFIG_MANAGEMENT_CONFIG_DAEMON_CODE_SERVICES_DETAILS_MW_COM_INTERNAL_CONFIG_PROVIDER_SERVICE_IMPL_H
+#define SCORE_CONFIG_MANAGEMENT_CONFIG_DAEMON_CODE_SERVICES_DETAILS_MW_COM_INTERNAL_CONFIG_PROVIDER_SERVICE_IMPL_H
 
-#include "score/mw/log/logger.h"
 #include "score/config_management/config_daemon/code/data_model/parameterset_collection_interfaces/read_only_parameterset_collection.h"
 #include "score/config_management/config_daemon/code/services/details/mw_com/generated_service/internal_config_provider_type.h"
 #include "score/config_management/config_daemon/code/services/internal_config_provider_service.h"
 #include "score/config_management/config_daemon/code/services/internal_config_provider_service_reactor.h"
+#include "score/mw/log/logger.h"
 #include <score/string_view.hpp>
 #include <memory>
 
@@ -34,7 +34,7 @@ class InternalConfigProviderService final : public IInternalConfigProviderServic
   public:
     static score::Result<InternalConfigProviderService> Create(
         std::shared_ptr<InternalConfigProviderServiceReactor> internal_config_provider_service_reactor,
-        const mw::com::InstanceSpecifier& instance_specifier);
+        const score::mw::com::InstanceSpecifier& instance_specifier);
 
     void SetInitialQualifierState(const config_daemon::InitialQualifierState initial_qualifier_state) noexcept override;
     bool SendLastUpdatedParameterSet(const std::string_view parameter_set_name) noexcept override;
@@ -56,4 +56,4 @@ class InternalConfigProviderService final : public IInternalConfigProviderServic
 }  // namespace config_management
 }  // namespace score
 
-#endif  // SCORE_CONFIG_MANAGEMENT_CONFIGDAEMON_CODE_SERVICES_DETAILS_MW_COM_INTERNAL_CONFIG_PROVIDER_SERVICE_IMPL_H
+#endif  // SCORE_CONFIG_MANAGEMENT_CONFIG_DAEMON_CODE_SERVICES_DETAILS_MW_COM_INTERNAL_CONFIG_PROVIDER_SERVICE_IMPL_H

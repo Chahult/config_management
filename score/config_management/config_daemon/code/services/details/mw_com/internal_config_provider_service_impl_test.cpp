@@ -12,9 +12,9 @@
 // *******************************************************************************
 
 #include "score/config_management/config_daemon/code/services/details/mw_com/internal_config_provider_service_impl.h"
+#include "score/config_management/config_daemon/code/services/internal_config_provider_service_reactor_mock.h"
 #include "score/mw/com/runtime.h"
 #include "score/mw/com/runtime_configuration.h"
-#include "score/config_management/config_daemon/code/services/internal_config_provider_service_reactor_mock.h"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <memory>
@@ -40,7 +40,7 @@ class InternalConfigProviderServiceMwComTest : public ::testing::Test
     {
         score::mw::com::runtime::RuntimeConfiguration runtime_configuration{
             "./score/config_management/config_daemon/code/services/details/mw_com/mw_com_config.json"};
-        mw::com::runtime::InitializeRuntime(runtime_configuration);
+        score::mw::com::runtime::InitializeRuntime(runtime_configuration);
     }
     void SetUp() override
     {

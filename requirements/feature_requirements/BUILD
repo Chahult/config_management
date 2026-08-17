@@ -11,42 +11,15 @@
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
 
-load("@trlc//:trlc.bzl", "trlc_requirements", "trlc_requirements_test")
+load("@score_tooling//bazel/rules/rules_score:rules_score.bzl", "feature_requirements")
 
-trlc_requirements(
+feature_requirements(
     name = "feature_requirements",
     srcs = [
         "feature_requirements.trlc",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
         "//requirements/assumed_system_requirements",
     ],
-    spec = [
-        "//third_party/traceability/config/trlc/score_model:requirement_metamodel",
-    ],
-    visibility = ["//visibility:public"],
 )
-
-trlc_requirements_test(
-    name = "feature_requirements_test",
-    reqs = [
-        ":feature_requirements",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-# lobster_trlc(
-#     name = "feature_requirements_lobster",
-#     config = "//third_party/traceability/config/lobster:feature_reqs_conf",
-#     requirements = [
-#         ":assumed_feature_requirements",
-#     ],
-#     visibility = ["//visibility:public"],
-# )
-
-# lobster_test(
-#     name = "traceability",
-#     config = "//third_party/traceability/config/lobster:traceability_feat_conf",
-#     inputs = [
-#         "//requirements/assumed_system_requirements:assumed_system_requirements_lobster",
-#         ":feature_requirements_lobster",
-#     ],
-# )

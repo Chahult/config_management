@@ -11,8 +11,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // *******************************************************************************
 
-#ifndef SCORE_CONFIG_MANAGEMENT_CONFIGDAEMON_CODE_SERVICES_DETAILS_MW_COM_GENERATED_SERVICE_INTERNAL_CONFIG_PROVIDER_TYPE_H
-#define SCORE_CONFIG_MANAGEMENT_CONFIGDAEMON_CODE_SERVICES_DETAILS_MW_COM_GENERATED_SERVICE_INTERNAL_CONFIG_PROVIDER_TYPE_H
+#ifndef SCORE_CONFIG_MANAGEMENT_CONFIG_DAEMON_CODE_SERVICES_DETAILS_MW_COM_GENERATED_SERVICE_INTERNAL_CONFIG_PROVIDER_TYPE_H
+#define SCORE_CONFIG_MANAGEMENT_CONFIG_DAEMON_CODE_SERVICES_DETAILS_MW_COM_GENERATED_SERVICE_INTERNAL_CONFIG_PROVIDER_TYPE_H
 
 #include "score/mw/com/types.h"
 
@@ -58,10 +58,10 @@ class InternalConfigProviderInterface : public Trait::Base
     typename Trait::template Method<mw_com_icp_types::GetParameterSet> get_parameterset{*this, "get_parameterset"};
 };
 
-using InternalConfigProviderSkeleton = mw::com::AsSkeleton<InternalConfigProviderInterface>;
+using InternalConfigProviderSkeleton = score::mw::com::AsSkeleton<InternalConfigProviderInterface>;
 
 }  // namespace config_daemon
 }  // namespace config_management
 }  // namespace score
 
-#endif  // SCORE_CONFIG_MANAGEMENT_CONFIGDAEMON_CODE_SERVICES_DETAILS_MW_COM_GENERATED_SERVICE_INTERNAL_CONFIG_PROVIDER_TYPE_H
+#endif  // SCORE_CONFIG_MANAGEMENT_CONFIG_DAEMON_CODE_SERVICES_DETAILS_MW_COM_GENERATED_SERVICE_INTERNAL_CONFIG_PROVIDER_TYPE_H

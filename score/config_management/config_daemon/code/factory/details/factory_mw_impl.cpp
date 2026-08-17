@@ -11,8 +11,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // *******************************************************************************
 
-#include "score/mw/service/backend/mw_com/provided_service_builder.h"
-#include "score/mw/service/backend/mw_com/provided_service_decorator.h"
 #include "score/config_management/config_daemon/code/data_model/details/parameterset_collection_impl.h"
 #include "score/config_management/config_daemon/code/data_model/details/parameterset_collection_manager_impl.h"
 #include "score/config_management/config_daemon/code/data_model/parameter_set_storage/details/parameter_set_storage_score_impl.h"
@@ -24,6 +22,9 @@
 #include "score/config_management/config_daemon/code/plugins/plugin_collector/details/plugin_collector_impl.h"
 #include "score/config_management/config_daemon/code/services/details/internal_config_provider_service_reactor_impl.h"
 #include "score/config_management/config_daemon/code/services/details/mw_com/internal_config_provider_service_impl.h"
+#include "score/mw/log/logging.h"
+#include "score/mw/service/backend/mw_com/provided_service_builder.h"
+#include "score/mw/service/backend/mw_com/provided_service_decorator.h"
 
 #include <score/utility.hpp>
 #include <memory>
@@ -39,7 +40,8 @@ namespace
 {
 
 const auto kICPServiceInstanceSpecifierName =
-    mw::com::InstanceSpecifier::Create(std::string("ConfigDaemon/ConfigDaemon_RootSwc/InternalConfigProviderAppPPort"))
+    score::mw::com::InstanceSpecifier::Create(
+        std::string("ConfigDaemon/ConfigDaemon_RootSwc/InternalConfigProviderAppPPort"))
         .value();
 }  // namespace
 
@@ -78,7 +80,14 @@ LastUpdatedParameterSetSender Factory::CreateLastUpdatedParameterSetSender(
             return internal_config_provider_service->SendLastUpdatedParameterSet(parameter_set_name);
         };
     }
-    return {};
+    // Not fatal: the underlying service backend may not (yet) provide a real implementation
+    // (e.g. stub-only mw::service). Return a no-op callback instead of an empty one so callers
+    // relying on a valid callback keep working.
+    mw::log::LogWarn() << "Factory::" << __func__
+                       << ": InternalConfigProviderService unavailable, using no-op callback";
+    return [](const std::string_view) noexcept -> bool {
+        return false;
+    };
 }
 
 InitialQualifierStateSender Factory::CreateInitialQualifierStateSender(mw::service::ProvidedServiceContainer& services)
@@ -92,7 +101,10 @@ InitialQualifierStateSender Factory::CreateInitialQualifierStateSender(mw::servi
             internal_config_provider_service->SetInitialQualifierState(initial_qualifier_state);
         };
     }
-    return {};
+    // Not fatal: see comment above.
+    mw::log::LogWarn() << "Factory::" << __func__
+                       << ": InternalConfigProviderService unavailable, using no-op callback";
+    return [](const config_daemon::InitialQualifierState) noexcept -> void {};
 }
 
 std::shared_ptr<data_model::IParameterSetCollectionManager> Factory::CreateParameterSetCollectionManager(

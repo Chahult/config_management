@@ -88,8 +88,10 @@ cc_test(
     visibility = ["//score/config_management/config_daemon/code/data_model:__pkg__"],
     deps = [
         ":parameterset_collection_manager_impl",
+        "//score/config_management/config_daemon/code/data_model:parameterset_collection_mock",
         "//score/config_management/config_daemon/code/data_model/parameter_set_storage:mock",
         "//score/config_management/config_daemon/code/plugins:mock",
+        "//score/config_management/config_daemon/code/types/initial_qualifier_state",
         "@googletest//:gtest_main",
         "@score_logging//score/mw/log/test/console_logging_environment",
     ],

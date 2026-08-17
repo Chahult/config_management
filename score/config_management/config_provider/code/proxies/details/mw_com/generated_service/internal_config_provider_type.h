@@ -11,8 +11,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // *******************************************************************************
 
-#ifndef SCORE_CONFIG_MANAGEMENT_CONFIGPROVIDER_CODE_PROXIES_DETAILS_MW_COM_GENERATED_SERVICE_INTERNAL_CONFIG_PROVIDER_TYPE_H
-#define SCORE_CONFIG_MANAGEMENT_CONFIGPROVIDER_CODE_PROXIES_DETAILS_MW_COM_GENERATED_SERVICE_INTERNAL_CONFIG_PROVIDER_TYPE_H
+#ifndef SCORE_CONFIG_MANAGEMENT_CONFIG_PROVIDER_CODE_PROXIES_DETAILS_MW_COM_GENERATED_SERVICE_INTERNAL_CONFIG_PROVIDER_TYPE_H
+#define SCORE_CONFIG_MANAGEMENT_CONFIG_PROVIDER_CODE_PROXIES_DETAILS_MW_COM_GENERATED_SERVICE_INTERNAL_CONFIG_PROVIDER_TYPE_H
 
 #include "score/mw/com/types.h"
 
@@ -54,10 +54,10 @@ class InternalConfigProviderInterface : public Trait::Base
         "initial_qualifier_state"};
 };
 
-using InternalConfigProviderSkeleton = mw::com::AsSkeleton<InternalConfigProviderInterface>;
+using InternalConfigProviderSkeleton = score::mw::com::AsSkeleton<InternalConfigProviderInterface>;
 
 }  // namespace config_daemon
 }  // namespace config_management
 }  // namespace score
 
-#endif  // SCORE_CONFIG_MANAGEMENT_CONFIGPROVIDER_CODE_PROXIES_DETAILS_MW_COM_GENERATED_SERVICE_INTERNAL_CONFIG_PROVIDER_TYPE_H
+#endif  // SCORE_CONFIG_MANAGEMENT_CONFIG_PROVIDER_CODE_PROXIES_DETAILS_MW_COM_GENERATED_SERVICE_INTERNAL_CONFIG_PROVIDER_TYPE_H

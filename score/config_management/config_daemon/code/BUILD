@@ -27,6 +27,7 @@ config_setting(
     flag_values = {":score_variant": "true"},
     visibility = [
         "//score/config_management/config_daemon:__subpackages__",
+        "//score/config_management/config_provider:__subpackages__",
     ],
 )
 
@@ -41,8 +42,9 @@ cc_test(
     tags = ["unit"],
     deps = [
         "//score/config_management/config_daemon/code/app/details:app_for_unit_test",
-        "@score_lifecycle_health//src/lifecycle_client_lib:applicationcontext_mock",
-        "@score_lifecycle_health//src/lifecycle_client_lib:lifecycle_mock",
+        "@score_lifecycle_health//score/launch_manager:applicationcontext_mock_cc",
+        "@score_lifecycle_health//score/launch_manager:lifecycle_mock_cc",
+        "@score_lifecycle_health//score/launch_manager:runapplication_cc",
     ] + select({
         ":is_score_variant": ["//score/config_management/config_daemon/code/factory/details:mw_factory_for_unit_test"],
         "//conditions:default": ["//score/config_management/config_daemon/code/factory/details:ara_factory_for_unit_test"],
@@ -61,6 +63,7 @@ cc_unit_test_suites_for_host_and_qnx(
         "//score/config_management/config_daemon/code/data_model:unit_tests",
         "//score/config_management/config_daemon/code/data_model/parameter_set_storage:unit_tests",
         "//score/config_management/config_daemon/code/services:unit_tests",
+        "//score/config_management/config_daemon/code/plugins:unit_tests",
     ] + load_custom_test_suites(),
     visibility = ["//score/config_management/config_daemon:__subpackages__"],
 )

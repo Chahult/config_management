@@ -50,8 +50,8 @@ class InternalConfigProviderTest : public ::testing::Test
     void SetUp() override
     {
         score::mw::com::runtime::RuntimeConfiguration runtime_configuration{
-            "./score/config_management/ConfigProvider/code/proxies/details/mw_com/mw_com_config.json"};
-        mw::com::runtime::InitializeRuntime(runtime_configuration);
+            "./score/config_management/config_provider/code/proxies/details/mw_com/mw_com_config.json"};
+        score::mw::com::runtime::InitializeRuntime(runtime_configuration);
 
         skeleton_ = CreateService();
         std::ignore = skeleton_->initial_qualifier_state.Update(MwComInitialQualifierStateType::kUndefined);
@@ -116,6 +116,7 @@ class InternalConfigProviderGetInitialQualifierStatePassTest
 TEST_P(InternalConfigProviderGetInitialQualifierStatePassTest, GetInitialQualifierState_Pass)
 {
     RecordProperty("Priority", "3");
+    RecordProperty("lobster-tracing", "ConfigProvider.GetInitialQualifierState");
     RecordProperty("Verifies", " 11397333");
     RecordProperty("DerivationTechnique", "Analysis of requirements");
     RecordProperty("TestType", "Requirements-based test");

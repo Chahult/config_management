@@ -1,5 +1,5 @@
 # *******************************************************************************
-# Copyright (c) 2024 Contributors to the Eclipse Foundation
+# Copyright (c) 2026 Contributors to the Eclipse Foundation
 #
 # See the NOTICE file(s) distributed with this work for additional
 # information regarding copyright ownership.
@@ -11,63 +11,28 @@
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
 
-load("@lobster//:lobster.bzl", "lobster_trlc")
-load("@trlc//:trlc.bzl", "trlc_requirements", "trlc_requirements_test")
+load(
+    "@score_tooling//bazel/rules/rules_score:rules_score.bzl",
+    "assumptions_of_use",
+    "dependability_analysis",
+    "fmea",
+)
 
-# Failures Modes
-trlc_requirements(
-    name = "failure_modes",
-    srcs = [
-        "failure_modes.trlc",
-    ],
-    spec = [
-        "//third_party/traceability/config/trlc/score_model:requirement_metamodel",
-    ],
+# Failure Modes
+fmea(
+    name = "fmea",
+    failuremodes = ["failure_modes.trlc"],
     visibility = ["//visibility:public"],
 )
 
-trlc_requirements_test(
-    name = "failure_modes_test",
-    reqs = [
-        ":failure_modes",
-    ],
+assumptions_of_use(
+    name = "assumptions_of_use",
+    srcs = ["aou.trlc"],
     visibility = ["//visibility:public"],
 )
 
-lobster_trlc(
-    name = "failure_modes_lobster",
-    config = "//third_party/traceability/config/lobster:safety_analysis_conf",
-    requirements = [
-        ":failure_modes",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-# AoUs
-trlc_requirements(
-    name = "control_measures",
-    srcs = [
-        "aou.trlc",
-    ],
-    spec = [
-        "//third_party/traceability/config/trlc/score_model:requirement_metamodel",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-trlc_requirements_test(
-    name = "control_measures_test",
-    reqs = [
-        ":control_measures",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-lobster_trlc(
-    name = "control_measures_lobster",
-    config = "//third_party/traceability/config/lobster:safety_analysis_conf",
-    requirements = [
-        ":control_measures",
-    ],
+dependability_analysis(
+    name = "dependability_analysis",
+    fmea = [":fmea"],
     visibility = ["//visibility:public"],
 )

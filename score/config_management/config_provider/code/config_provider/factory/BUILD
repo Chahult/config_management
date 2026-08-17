@@ -10,7 +10,6 @@ cc_library(
     features = COMPILER_WARNING_FEATURES,
     tags = ["FUSA"],
     visibility = [
-        "//score/config_management/config_daemon/test:__subpackages__",
         "//score/config_management/config_provider:__subpackages__",
     ],
     deps = [

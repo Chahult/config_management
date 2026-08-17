@@ -48,8 +48,8 @@ class ConfigProviderFactoryTest : public ::testing::Test
     void SetUp() override
     {
         score::mw::com::runtime::RuntimeConfiguration runtime_configuration{
-            "./score/config_management/ConfigProvider/code/config_provider/factory/mw_com_config.json"};
-        mw::com::runtime::InitializeRuntime(runtime_configuration);
+            "./score/config_management/config_provider/code/config_provider/factory/mw_com_config.json"};
+        score::mw::com::runtime::InitializeRuntime(runtime_configuration);
 
         skeleton = CreateService();
         std::ignore = skeleton->initial_qualifier_state.Update(MwComInitialQualifierStateType::kUndefined);
@@ -171,6 +171,7 @@ TEST_F(ConfigProviderFactoryTest, FoundServiceDuringCreation)
     RecordProperty("Priority", "3");
     RecordProperty("DerivationTechnique", "Analysis of requirements");
     RecordProperty("TestType", "Requirements-based test");
+    RecordProperty("lobster-tracing", "ConfigProvider.CallbackTriggeredOnServiceAvailable");
     RecordProperty("Verifies", "23162623");
     RecordProperty("ASIL", "QM");
     RecordProperty("Description",
