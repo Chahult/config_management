@@ -12,7 +12,7 @@
 # *******************************************************************************
 
 name: QNX Build & Test
-# Dummy change to trigger a PR validating the QNX workflow end-to-end.
+# Dummy change (round 2) to trigger a fresh PR and check QNX secret debug logs.
 on:
   pull_request_target:
     types: [opened, reopened, synchronize]
