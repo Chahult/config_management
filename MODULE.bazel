@@ -163,10 +163,12 @@ git_override(
 
 # The score_communication override above transitively requires score_tooling@2.3.1,
 # which removed the `fmea` rule still used by requirements/safety_analysis/BUILD;
-# pin back to the version this repo is compatible with.
+# pin back to the version main currently resolves to (2.2.2, not the root module's
+# declared 2.2.1 - that older patch lacks a llvm_toolchain exec-config fix needed
+# by rules_rust cc-rs crates and breaks docs/coverage builds).
 single_version_override(
     module_name = "score_tooling",
-    version = "2.2.1",
+    version = "2.2.2",
 )
 
 bazel_dep(name = "score_logging", version = "0.2.4")
